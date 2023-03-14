@@ -10,6 +10,7 @@ def verificacaoJogadaPeao(tabuleiro, pos1, pos2, vez, peca):
     if(tabuleiro[pos2[0]][pos2[1]].__contains__("A")):
       print("Movimento inválido: Há peças aliadas no caminho")
       return False
+    #Verifica um movimento que não seja uma casa p/ frente
     if(pos1[0] - pos2[0] != 1 or pos2[1] != pos1[1]):
       print("O peão não pode realizar esse movimento")
       return False
@@ -22,6 +23,7 @@ def verificacaoJogadaPeao(tabuleiro, pos1, pos2, vez, peca):
     if(tabuleiro[pos2[0]][pos2[1]].__contains__("B")):
       print("Movimento inválido: Há peças aliadas no caminho")
       return False
+    #Verifica um movimento que não seja uma casa p/ frente
     if(pos2[0] - pos1[0] != 1 or pos2[1] != pos1[1]):
       print("O peão não pode realizar esse movimento")
       return False

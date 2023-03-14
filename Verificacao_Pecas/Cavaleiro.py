@@ -11,17 +11,18 @@ def verificacaoJogadaCavaleiro(tabuleiro, pos1, pos2, vez, peca):
         print("Movimento Inválido: Há peças aliadas no caminho")
         return False
     if(pos1[0] > 1 and pos2[0] == pos1[0] - 2): 
-      if(pos1[1] != 8 and pos2[1] == pos1[1] + 1): #Movimento em L p/ direita
+      #Movimento em L p/ direita
+      if(pos1[1] != 8 and pos2[1] == pos1[1] + 1): 
         print("Movimento Válido")
         return True
-      if(pos1[1] != 0 and pos2[1] == pos1[1] - 1): #Movimento em L p/ esquerda 
+      #Movimento em L p/ esquerda 
+      if(pos1[1] != 0 and pos2[1] == pos1[1] - 1): 
         print("Movimento Válido")
         return True
       print("O cavaleiro não pode realizar esse movimento!")
       return False
-    else:
-      print("O cavaleiro não pode realizar esse movimento!")
-      return False
+    print("O cavaleiro não pode realizar esse movimento!")
+    return False
 
   #Verificações para o Jogador B
   else:
@@ -33,15 +34,15 @@ def verificacaoJogadaCavaleiro(tabuleiro, pos1, pos2, vez, peca):
         print("Movimento Inválido: Há peças aliadas no caminho")
         return False
     if(pos1[0] < 7 and pos2[0] == pos1[0] + 2): 
-      if(pos1[1] != 0 and pos2[1] == pos1[1] - 1): #Movimento em L p/ direita
+      #Movimento em L p/ direita
+      if(pos1[1] != 0 and pos2[1] == pos1[1] - 1):
         print("Movimento Válido")
         return True
-      if(pos1[1] != 8 and pos2[1] == pos1[1] + 1): #Movimento em L p/ esquerda 
+      #Movimento em L p/ esquerda 
+      if(pos1[1] != 8 and pos2[1] == pos1[1] + 1): 
         print("Movimento Válido")
         return True
       print("O cavaleiro não pode realizar esse movimento!")
       return False
-    else:
-      print("O cavaleiro não pode realizar esse movimento!")
-      return False
-  return False
+    print("O cavaleiro não pode realizar esse movimento!")
+    return False
