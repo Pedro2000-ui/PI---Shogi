@@ -23,7 +23,7 @@ def verificaJogadaValida(tabuleiro, pos1, pos2, vez, timeA, timeB):
   elif(peca.__contains__("1")):
     return Peao.verificacaoJogadaPeao(tabuleiro, pos1, pos2, vez, peca)
   elif(peca.__contains__("2")):
-    return Lanca.verificacaoJogadaLanca(tabuleiro, vez, pos1, pos2)
+    return Lanca.verificacaoJogadaLanca(tabuleiro, pos1, pos2, vez, peca)
   elif(peca.__contains__("3")):
     return Cavaleiro.verificacaoJogadaCavaleiro(tabuleiro, pos1, pos2, vez, peca)
   elif(peca.__contains__("4")):

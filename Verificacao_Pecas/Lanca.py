@@ -1,46 +1,39 @@
-# Funções da lança
-def verificacaoMovimentoLanca(tabuleiro, vez, pos1, pos2):
-  if vez:
-    for i in range(pos2[0], (pos1[0] + 1)):
-      if tabuleiro[-i + pos1[0] + pos2[0]][pos1[1]].__contains__("B") and pos2[0] != (-i + pos1[0] + pos2[0]):
-        print("Movimento inválido: Não da para pular uma peça inimiga")
+import os
+def verificacaoJogadaLanca(tabuleiro, pos1, pos2, vez, peca):
+  os.system("clear")
+  
+  #Verificações do Jogador A
+  if(vez == True):
+    if(peca.__contains__("B")):
+        print("Movimento Inválido: Essa é uma peça adversária")
         return False
-    
-      if tabuleiro[-i + pos1[0] + pos2[0]][pos1[1]].__contains__("A") and pos1[0] != (-i + pos1[0] + pos2[0]):
-        print("Movimento inválido: Há peças aliadas no caminho")
+    if(tabuleiro[pos2[0]][pos2[1]].__contains__("A")):
+        print("Movimento Inválido: Há peças aliadas no caminho")
         return False
-    return True
+    #Verifica um movimento p/ frente
+    if(pos1[0] - pos2[0] >= 1 and pos2[1] == pos1[1]):
+      for i in range(pos2[0] + 1, pos1[0]): 
+        if(tabuleiro[i][pos1[1]] != "00"):
+          print("Movimento inválido: Não é possível saltar peças")
+          return False
+      print("Movimento Válido")
+      return True
+  
+  #Verificações do Jogador B
   else:
-    for i in range(pos1[0], (pos2[0] + 1)):
-      if tabuleiro[i][pos1[1]].__contains__("A") and pos2[0] != i:
-        print("Movimento inválido: Não da para pular uma peça inimiga")
+    if(peca.__contains__("A")):
+        print("Movimento Inválido: Essa é uma peça adversária")
         return False
-    
-      if tabuleiro[i][pos1[1]].__contains__("B") and pos1[0] != i:
-        print("Movimento inválido: Há peças aliadas no caminho")
+    if(tabuleiro[pos2[0]][pos2[1]].__contains__("B")):
+        print("Movimento Inválido: Há peças aliadas no caminho")
         return False
-    return True
-    
-def verificacaoJogadaLanca(tabuleiro, vez, pos1, pos2):
-  if pos1[1] != pos2[1]:
-    print("Movimento inválido: Coluna diferente")
-    return False
-    
-  if vez:
-    if pos1[0] <= pos2[0]:
-      print("Movimento inválido: Lança não anda para trás")
-      return False
-    if verificacaoMovimentoLanca(tabuleiro, vez, pos1, pos2) == False:
-      return False
-      
-    print("Movimento válido")
-    return True
-  else:
-    if pos1[0] >= pos2[0]:
-      print("Movimento inválido: Lança não anda para trás")
-      return False
-    if verificacaoMovimentoLanca(tabuleiro, vez, pos1, pos2) == False:
-      return False
-      
-    print("Movimento válido!")
-    return True
+    #Verifica um movimento p/ frente
+    if(pos1[0] - pos2[0] <= -1 and pos2[1] == pos1[1]):
+      for i in range(pos1[0] + 1, pos2[0]):
+        if(tabuleiro[i][pos1[1]] != "00"):
+          print("Movimento inválido: Não é possível saltar peças")
+          return False
+      print("Movimento Válido")
+      return True
+  print("A lança não pode realizar esse movimento")
+  return False
