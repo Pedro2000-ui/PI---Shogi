@@ -22,7 +22,7 @@ def minimax(jogo, jogador, profundidade_maxima = 8):
     return pior_valor
 
 ## Minimax com poda
-def minimax_alfabeta(jogo, jogador, profundidade_maxima = 8, alfa = float("-inf"), beta = float("inf")):
+def minimax_alfabeta(jogo, jogador, profundidade_maxima = 81, alfa = float("-inf"), beta = float("inf")):
   # se o jogo acabou ou se a profundidade é máxima
   if jogo.venceu() or jogo.empate() or profundidade_maxima == 0:
     return jogo.calcular_utilidade(jogador)
