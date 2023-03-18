@@ -31,7 +31,7 @@ def verificaJogadaValida(tabuleiro, pos1, pos2, vez, timeA, timeB):
   elif(peca.__contains__("5")):
     return General_Dourado.verificacaoJogadaOuro(tabuleiro, pos1, pos2, vez , peca)
   elif(peca.__contains__("6")):
-    return Bispo.verificacaoJogadaBispos(tabuleiro, vez, pos1, pos2)
+    return Bispo.verificacaoJogadaBispo(tabuleiro, pos1, pos2, vez, peca)
   elif(peca.__contains__("7")):
     return Torre.verificacaoJogadaTorre(tabuleiro, pos1, pos2, vez, peca)
   elif(peca.__contains__("8")):
