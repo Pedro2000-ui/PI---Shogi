@@ -34,10 +34,13 @@ class JogoShogi():
             print(str(i) + " " + str(j))
             pecas_agente.append((i, j))
 
-    pecas_agente = np.array(pecas_agente)
-    print(pecas_agente)
+      pecas_agente = np.array(pecas_agente)
+      print(pecas_agente)
 
-    return 0
+      # Fazer um for percorrendo todos itens do time B e pegar todas jogadas possíveis de cada um
+      # No fim será criado uma tupla contendo a posicao da peca e todas suas jogadas possiveis
+
+      return 0
 
   def venceu(self):
     raise NotImplementedError("Deve ser implementado")
