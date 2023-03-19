@@ -1,6 +1,7 @@
-import Shogi_Verificacoes as verificacoes
-import Shogi_Movimentacoes as movimentacoes
+from Verificacao_Movimentacao import Shogi_Verificacoes as verificacoes
 import os
+from Jogo_Shogi import JogoShogi
+
 def instrucoesJogo():
   print("\n#Peão - 1")
   print("#Lança - 2") 
@@ -16,11 +17,13 @@ def instrucoesJogo():
   print("\n#Exemplo -> 1A - Peão do time A; 8B - Rei do time B; 00 - Casa Vazia") 
   input("\nAperte qualquer tecla para continuar...")
   
-def solicitaPosicoesDeJogada(tabuleiro, timeA, timeB, vez, tenteNovamente):
+def solicitaPosicoesDeJogada(jogo, timeA, timeB, jogador_turno, humano, agente, tenteNovamente):
   if tenteNovamente:
     print("\nTente novamente.\n")
-  print(tabuleiro)
-  if vez:
+  print("Situação do Jogo:")
+  print(jogo.imprimir())
+  print("=======================================")
+  if jogador_turno == humano:
     print("\nVez do time A")
   else: 
     print("\nVez do time B")
@@ -49,22 +52,38 @@ def alternaVezTime(vez):
   else:
     return True
 
-def jogo(tabuleiro, estado, vez, timeA, timeB):
-  instrucoesJogo()
+def jogo(tabuleiro, estado, timeA, timeB):
   tenteNovamente = False
+  jogo = JogoShogi(tabuleiro)
+  (humano, agente) = jogo.inicializaJogadores()
+
+  instrucoesJogo()
   
   while(estado != "Fim"):
-    pos1, pos2 = solicitaPosicoesDeJogada(tabuleiro, timeA, timeB, vez, tenteNovamente)
+    pos1, pos2 = solicitaPosicoesDeJogada(jogo, timeA, timeB, jogo.jogador_turno, humano, agente, tenteNovamente)
     if(pos1[0] > 8 or pos1[1] > 8 or pos2[0] > 8 or pos2[1] > 8):
       os.system("clear")
       print("Não é possível sair do tabuleiro!!")
       tenteNovamente = True
     else:
-      movimentoValido = verificacoes.verificaJogadaValida(tabuleiro, pos1, pos2, vez, timeA, timeB)
-      if(movimentoValido):
-        movimentacoes.movimentacaoPeca(tabuleiro, pos1, pos2, timeA, timeB, vez)
-        vez = alternaVezTime(vez)
-        tenteNovamente = False
-        estado = "Jogando"
+      movimentoValido = verificacoes.verificaJogadaValida(tabuleiro, pos1, pos2, jogo.jogador_turno, humano, agente, timeA, timeB)
+      if(movimentoValido): 
+        if jogo.jogador_turno == humano:
+          jogo = jogo.jogar(tabuleiro, pos1, pos2, timeA, timeB, jogo.jogador_turno, humano, agente)
+          tenteNovamente = False
+          estado = "Jogando"
+
+          # if jogo.venceu():
+          #   print(f"{jogador_humano.imprimir()} Venceu!")
+          #   break
+          # elif jogo.empate():
+          #   print("Empate!")
+          #   break
+        else:
+          jogo.gerarJogadasValidas(tabuleiro, agente)
+          # agente = agente.jogar(jogo)
+          # print(jogo.imprimir_jogada(jogador_agente, jogada_agente))
+          # print("=======================================")
+          # jogo = jogo.jogar(jogada_agente)
       else: 
         tenteNovamente = True
