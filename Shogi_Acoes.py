@@ -58,7 +58,6 @@ def jogo(tabuleiro, estado, timeA, timeB):
   (humano, agente) = jogo.inicializaJogadores()
 
   instrucoesJogo()
-  
   while(estado != "Fim"):
     pos1, pos2 = solicitaPosicoesDeJogada(jogo, timeA, timeB, jogo.jogador_turno, humano, agente, tenteNovamente)
     if(pos1[0] > 8 or pos1[1] > 8 or pos2[0] > 8 or pos2[1] > 8):

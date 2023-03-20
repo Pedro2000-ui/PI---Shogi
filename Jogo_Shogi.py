@@ -27,15 +27,40 @@ class JogoShogi():
 
   def gerarJogadasValidas(self, tabuleiro, agente):
     if self.jogador_turno == agente:
-      pecas_agente = []
+      linha = []
+      coluna = []
       for i in range(0, 9):
         for j in range(0, 9):
           if tabuleiro[i][j].__contains__("B"):
-            print(str(i) + " " + str(j))
-            pecas_agente.append((i, j))
-
-      pecas_agente = np.array(pecas_agente)
-      print(pecas_agente)
+            #Mapeia onde estão as peças do Agente
+            linha.append(i)
+            coluna.append(j)
+      
+      movimentacoesValidas = {}
+      for i in range(0, len(linha)):
+      
+        #Movimentos Válidos pro Peão
+        if tabuleiro[linha[i]][coluna[i]].__contains__("1B"):
+          #Verifica um movimento p/ frente com base na posição atual do Peão
+          if tabuleiro[linha[i] + 1][coluna[i]].__contains__("A") or tabuleiro[linha[i] + 1][coluna[i]] == "00":
+            linha_valida = linha[i] + 1
+            coluna_valida = coluna[i]
+            movimentacoesValidas.update({
+              "Peão " + str(linha[i]) + " " + str(coluna[i]): str(linha_valida) + " " + str(coluna_valida)
+            })
+        #Movimentos Válidos pra Lança
+        elif tabuleiro[linha[i]][coluna[i]].__contains__("2B"):
+          #Verifica um movimento p/ frente da posição que está a lança até o fim do tabuleiro
+          for j in range (linha[i] + 1, 9):
+            if(tabuleiro[j][coluna[i]] != "00"):
+              break
+            linha_valida = j
+            coluna_valida = coluna[i]
+            movimentacoesValidas.update({
+              "Lança " + str(linha[i]) + " " + str(coluna[i]): str(linha_valida) + " " + str(coluna_valida)
+            })
+      
+      print(movimentacoesValidas)
 
       # Fazer um for percorrendo todos itens do time B e pegar todas jogadas possíveis de cada um
       # No fim será criado uma tupla contendo a posicao da peca e todas suas jogadas possiveis
