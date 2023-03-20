@@ -52,13 +52,15 @@ class JogoShogi():
         elif tabuleiro[linha[i]][coluna[i]].__contains__("2B"):
           #Verifica um movimento p/ frente da posição que está a lança até o fim do tabuleiro
           for j in range (linha[i] + 1, 9):
-            if(tabuleiro[j][coluna[i]] != "00"):
+            if(tabuleiro[j][coluna[i]].__contains__("B")):
               break
             linha_valida = j
             coluna_valida = coluna[i]
             movimentacoesValidas.update({
               "Lança " + str(linha[i]) + " " + str(coluna[i]): str(linha_valida) + " " + str(coluna_valida)
             })
+            if(tabuleiro[j][coluna[i]].__contains__("A")):
+              break
       
       print(movimentacoesValidas)
 
