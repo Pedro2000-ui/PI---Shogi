@@ -22,23 +22,23 @@ def minimax(jogo, jogador, profundidade_maxima = 8):
     return pior_valor
 
 ## Minimax com poda
-def minimax_alfabeta(jogo, jogador, profundidade_maxima = 81, alfa = float("-inf"), beta = float("inf")):
+def minimax_alfabeta(jogo, jogador, tabuleiro, timeA, timeB, jogador_turno, humano, agente, alfa = float("-inf"), beta = float("inf"), profundidade_maxima = 1):
   # se o jogo acabou ou se a profundidade é máxima
-  if jogo.venceu() or jogo.empate() or profundidade_maxima == 0:
-    return jogo.calcular_utilidade(jogador)
+  if jogo.venceu(timeA, timeB, humano, agente) or profundidade_maxima == 1:
+    return jogo.calcular_utilidade(timeA, timeB, humano, agente)
 
   if jogador.e_max(): # turno do MAX
     # busca todos os possíveis jogos
-    for proximo_jogo in jogo.gerar_jogadas_validas():
-      utilidade = minimax_alfabeta(jogo.jogar(proximo_jogo), jogador.proximo_turno(), profundidade_maxima - 1, alfa, beta)
+    for proximo_jogo in jogo.gerarJogadasValidas(tabuleiro, timeA, timeB, jogador_turno, humano, agente):
+      utilidade = minimax_alfabeta(jogo.jogar(tabuleiro, proximo_jogo["peca"], proximo_jogo["jogada"], timeA, timeB, jogador_turno, humano, agente), jogo.turno(),tabuleiro,timeA, jogador_turno, timeB, humano, agente, alfa, beta, profundidade_maxima - 1)
       alfa = max(utilidade, alfa)
       if alfa >= beta: break
     return alfa
   
   else: # turno no MIN
     # busca todos os possíveis jogos
-    for proximo_jogo in jogo.gerar_jogadas_validas():
-      utilidade = minimax_alfabeta(jogo.jogar(proximo_jogo), jogador.proximo_turno(), profundidade_maxima - 1, alfa, beta)
+    for proximo_jogo in jogo.gerarJogadasValidas(tabuleiro, timeA, timeB, jogador_turno, humano, agente):
+      utilidade = minimax_alfabeta(jogo.jogar(tabuleiro, proximo_jogo["peca"], proximo_jogo["jogada"], timeA, timeB, jogador_turno, humano, agente), jogo.turno(),tabuleiro,timeA, jogador_turno, timeB, humano, agente, alfa, beta, profundidade_maxima - 1)
       beta = min(utilidade, beta)
       if alfa >= beta: break
     return beta

@@ -1,6 +1,6 @@
 import os
 def verificacaoJogadaPrata(tabuleiro, pos1, pos2, jogador_turno, humano, agente, peca):
-  os.system("clear")
+  # os.system("clear")
   
   #Verificações para o Jogador A
   if(jogador_turno == humano):
