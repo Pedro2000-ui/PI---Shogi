@@ -29,8 +29,7 @@ class JogoShogi():
   def gerarJogadasValidas(self, tabuleiro, timeA, timeB, jogador_turno, humano, agente):
     pecas_com_jogadas_validas = []
     if self.jogador_turno == agente:
-      linha = []
-      coluna = []
+      pecas_agente = []
       for i in range(0, 9):
         for j in range(0, 9):
           if tabuleiro[i][j].__contains__("B"):

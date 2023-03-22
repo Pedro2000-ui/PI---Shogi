@@ -59,10 +59,7 @@ def jogo(tabuleiro, estado, timeA, timeB):
 
   instrucoesJogo()
   while(estado != "Fim"):
-    if jogo.jogador_turno == humano:
-      pos1, pos2 = solicitaPosicoesDeJogada(jogo, timeA, timeB, jogo.jogador_turno, humano, agente, tenteNovamente)
-    else:
-      pos1, pos2 = [0, 0], [0, 0]
+    pos1, pos2 = solicitaPosicoesDeJogada(jogo, timeA, timeB, jogo.jogador_turno, humano, agente, tenteNovamente)
     if(pos1[0] > 8 or pos1[1] > 8 or pos2[0] > 8 or pos2[1] > 8):
       os.system("clear")
       print("Não é possível sair do tabuleiro!!")
@@ -79,16 +76,8 @@ def jogo(tabuleiro, estado, timeA, timeB):
             print(f"{jogador_humano.imprimir()} Venceu!")
             break
         else:
-          tabuleiro_aux = [["2B", "3B", "4B", "5B", "8B", "5B", "4B", "3B", "2B"],
-                      ["00", "7B", "00", "00", "00", "00", "00", "6B", "00"],
-                      ["1B", "1B", "1B", "1B", "1B", "1B", "1B", "1B", "1B"],
-                      ["00", "00", "00", "00", "00", "00", "00", "00", "00"],
-                      ["00", "00", "00", "00", "00", "00", "00", "00", "00"],
-                      ["00", "00", "00", "00", "00", "00", "00", "00", "00"],
-                      ["1A", "1A", "1A", "1A", "1A", "1A", "1A", "1A", "1A"],
-                      ["00", "6A", "00", "00", "00", "00", "00", "7A", "00"],
-                      ["2A", "3A", "4A", "5A", "8A", "5A", "4A", "3A", "2A"]]
-          jogada_agente = agente.jogar(jogo, tabuleiro_aux, timeA, timeB, jogo.jogador_turno, humano, agente)
+          TABULEIRO_AUX = tabuleiro
+          jogada_agente = agente.jogar(jogo, TABULEIRO_AUX, timeA, timeB, jogo.jogador_turno, humano, agente)
           print("=======================================")
           jogo = jogo.jogar(tabuleiro, jogada_agente["peca"], jogada_agente["jogada"], timeA, timeB, jogo.jogador_turno, humano, agente)
           print(tabuleiro)
