@@ -76,9 +76,17 @@ def jogo(tabuleiro, estado, timeA, timeB):
             print(f"{jogador_humano.imprimir()} Venceu!")
             break
         else:
-          TABULEIRO_AUX = tabuleiro
-          jogada_agente = agente.jogar(jogo, TABULEIRO_AUX, timeA, timeB, jogo.jogador_turno, humano, agente)
+          # novo_jogo = jogo.copy()
+          novo_tabuleiro = tabuleiro.copy()
+          novo_timeA = timeA.copy()
+          novo_timeB = timeB.copy()
+          # novo_jogador_turno = jogo.jogador_turno.copy()
+          # novo_humano = humano.copy()
+          # novo_agente = agente.copy()
+
+          jogada_agente = agente.jogar(jogo, novo_tabuleiro, novo_timeA, novo_timeB, jogo.jogador_turno, humano, agente)
           print("=======================================")
+          print(jogada_agente)
           jogo = jogo.jogar(tabuleiro, jogada_agente["peca"], jogada_agente["jogada"], timeA, timeB, jogo.jogador_turno, humano, agente)
           print(tabuleiro)
       else: 
