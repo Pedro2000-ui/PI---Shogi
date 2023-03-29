@@ -1,9 +1,9 @@
 import os
-def verificacaoJogadaPrata(tabuleiro, pos1, pos2, vez, peca):
-  os.system("clear")
+def verificacaoJogadaPrata(tabuleiro, pos1, pos2, jogador_turno, humano, agente, peca):
+  # os.system("clear")
   
   #Verificações para o Jogador A
-  if(vez == True):
+  if(jogador_turno == humano):
     if(peca.__contains__("B")):
       print("Movimento Inválido: Essa é uma peça adversária")
       return False
